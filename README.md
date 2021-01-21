@@ -2,6 +2,9 @@
 
 Tämän sovelluksen tarkoituksena on tarjota yksinkertainen alusta opetuskursseille ja toimia SQL-websovellus-harjoituksena. 
 
-Sovelluksessa on kolme eri käyttäjätyyppiä: opiskelija, opettaja
-ja ylläpitäjä. Opiskelijat voivat luoda itselleen tunnuksen. Ylläpitäjä voi lisätä sovellukseen kursseja, joille opiskelijat pystyvät ilmoittautumaan. Kursseille voi lisätä materiaalia tekstimuodossa
-sekä monivalintatehtäviä, jotka voi tarkistaa automaattisesti. Opiskelijat voivat ratkoa näitä tehtäviä. Lisäksi opettajat voivat seurata oppilaiden edistymistä.
+Sovelluksessa on kolme eri käyttäjätyyppiä ja niiden alustavat oikeudet toiminnallisuuksiin: 
+* Opiskelija - voi luoda tunnuksen, ilmoittautua kursseille ja ratkoa tehtäviä
+* Opettaja - voi seurata opiskelijoiden edistymistä ja lisätä materiaalia olemassaoleville kursseille
+* Ylläpitäjä - voi lisätä kursseja ja poistaa käyttäjiä
+
+Lisäksi kursseille voi lisätä tekstimateriaalia ja monivalintatehtäviä. Tehtävät voi tarkistaa automaattisesti. 
