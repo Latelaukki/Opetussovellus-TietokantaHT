@@ -11,6 +11,8 @@ Lisäksi kursseille voi lisätä tekstimateriaalia ja monivalintatehtäviä. Teh
 
 Sovellukseen pääsee [täältä](https://tietokanta-opetussovellus.herokuapp.com/):
 
+Sovelluksen toiminnallisuudet ovat vielä sen verran vaiheessa, että kummempia käyttöohjeita ei oikein ole.
+
 Sovelluksen tila tällä hetkellä:
 
 Sovelluksen voi avata, mutta itselleni aukeaa vain uloskirjautumislinkki. Tunnuksen luonti pitäisi toimia, mutta uloskirjautuminen puuttuu, joten kerran sisään kirjauduttua register-sivulle ei ilmeisesti pääse. Kurssien käsittely on vielä kokonaan toteuttamatta, courses-taulu on kuitenkin luotu tietokantaan. 
