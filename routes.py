@@ -4,10 +4,6 @@ import courses, users
 
 @app.route("/")
 def index():
-    # if (courses.add_course):
-    #     return redirect("/")
-    # else:
-    #     return render_template("error.html",message="Viestin lähetys ei onnistunut")
     list = courses.get_courses
     return render_template("index.html", courses=list)
 
@@ -35,3 +31,7 @@ def register():
             return redirect("/")
         else:
             return render_template("error.html",message="Antamasi tunnus on jo käytössä, kokeile toista")
+
+# @app.route("/logout", methods=["GET"])
+# def logout():
+#     if request.method == "GET":
