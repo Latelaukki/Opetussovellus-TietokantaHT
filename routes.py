@@ -18,7 +18,7 @@ def login():
         if users.login(username,password):
             return redirect("/")
         else:
-            return render_template("error.html",message="Väärä tunnus tai salasana")
+            return render_template("login.html",message="Väärä tunnus tai salasana")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -30,8 +30,9 @@ def register():
         if users.register(username,password):
             return redirect("/")
         else:
-            return render_template("error.html",message="Antamasi tunnus on jo käytössä, kokeile toista")
+            return render_template("register.html",message="Antamasi tunnus on jo käytössä, kokeile toista")
 
-# @app.route("/logout", methods=["GET"])
-# def logout():
-#     if request.method == "GET":
+@app.route("/logout")
+def logout():
+    users.logout()
+    return redirect("/")
