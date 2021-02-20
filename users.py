@@ -18,20 +18,32 @@ def login(username, password):
 def logout():
     del session["user_id"]
 
-def register(username, password):    
+def register(username,password):
     hash_value = generate_password_hash(password)
     try:
-        sql = "INSERT INTO users (username,password) VALUES (:username,:password)"
-        db.session.execute(sql, {"username":username,"password":hash_value})
+        sql = "INSERT INTO users (username,password) VALUES (:username,:password) RETURNING id"
+        result = db.session.execute(sql, {"username":username,"password":hash_value})
+        user_id = result.fetchone()[0]
+        sql = "INSERT INTO privileges (user_id,admin,teacher) VALUES (:user_id,0,0)"
+        db.session.execute(sql, {"user_id":user_id})
         db.session.commit()
     except:
-        return False
+        return False   
     return login(username,password)
 
+# def addPrivilege():
+#     sql = "SELECT id from privileges WHERE user_id=id"
+#     result = db.session.execute(sql, {"id":user_id()})
+
+
+# def addTeacher():
+#     if 
+
+
 def isTeacher():
-    sql = "SELECT 1 FROM teachers WHERE user_id=:id"
+    sql = "SELECT teacher FROM privileges WHERE user_id=:id"
     result = db.session.execute(sql, {"id":user_id()})
-    return result.fetchone() != None
+    return result.fetchone() == 1
 
 def isEmpty(username):
     return username == ""

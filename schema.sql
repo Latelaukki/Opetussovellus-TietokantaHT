@@ -6,16 +6,13 @@ CREATE TABLE users (
 
 CREATE TABLE courses (
     id SERIAL PRIMARY KEY,
-    name TEXT UNIQUE,
-    content TEXT
+    name TEXT UNIQUE NOT NULL UNIQUE,
+    content TEXT NOT NULL
 );
 
-CREATE TABLE admins (
+CREATE TABLE privileges (
     id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users
-);
-
-CREATE TABLE teachers (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users
+    user_id INTEGER REFERENCES users,
+    admin INTEGER,
+    teacher INTEGER
 );
