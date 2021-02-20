@@ -4,9 +4,11 @@ import courses, users
 
 @app.route("/")
 def index():
+    allow = False
     list = courses.get_courses
-    return render_template("index.html", courses=list)
-
+    if users.isTeacher():
+        allow = True
+    return render_template("index.html", courses=list, IsTeacher=allow)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -27,6 +29,8 @@ def register():
     if request.method == "POST":
         username = request.form["username"]
         password = request.form["password"]
+        if users.isEmpty(username):
+            return render_template("register.html", message="Tunnuksen on oltava vähintään 1 merkki.")
         if users.register(username,password):
             return redirect("/")
         else:
@@ -36,3 +40,9 @@ def register():
 def logout():
     users.logout()
     return redirect("/")
+
+# @app.route("/add", methods=["GET", "POST"])
+# def add():
+#     allow = False
+#     if users.isTeacher:
+#         allow = True

@@ -18,15 +18,23 @@ def login(username, password):
 def logout():
     del session["user_id"]
 
-def register(username, password):
+def register(username, password):    
     hash_value = generate_password_hash(password)
     try:
-        sql = "INSERT INTO users (username,password,privilige) VALUES (:username,:password,0)"
+        sql = "INSERT INTO users (username,password) VALUES (:username,:password)"
         db.session.execute(sql, {"username":username,"password":hash_value})
         db.session.commit()
     except:
         return False
     return login(username,password)
+
+def isTeacher():
+    sql = "SELECT 1 FROM teachers WHERE user_id=:id"
+    result = db.session.execute(sql, {"id":user_id()})
+    return result.fetchone() != None
+
+def isEmpty(username):
+    return username == ""
 
 def user_id():
     return session.get("user_id",0)

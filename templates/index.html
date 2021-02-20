@@ -1,7 +1,12 @@
+
 <h1>Kurssit</h1>
 {% if session.user_id %}
 Olet kirjautunut sisään.
 <a href="/logout">Kirjaudu ulos</a>
+    <p>
+    {% if IsTeacher %}
+        <a href="/add">Lisää kurssi</a>
+    {% endif %}
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}
