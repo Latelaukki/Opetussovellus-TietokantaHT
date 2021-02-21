@@ -31,14 +31,22 @@ def register(username,password):
         return False   
     return login(username,password)
 
-# def addPrivilege():
-#     sql = "SELECT id from privileges WHERE user_id=id"
-#     result = db.session.execute(sql, {"id":user_id()})
+def isUser():
+    sql = "SELECT 1 FROM users WHERE user1=:user1 AND user2=:user2"
+    result = db.session.execute(sql, {"user1":user_id(), "user2":id})
+    return result.fetchone() != None
 
-
-# def addTeacher():
-#     if 
-
+def addTeacher(username):
+    try:
+        sql = "SELECT id FROM users WHERE username=:username"
+        result = db.session.execute(sql, {"username":username})
+        user_id = result.fetchone()
+        sql = "UPDATE privileges SET teacher = 1 WHERE user_id=:user_id"
+        db.session.execute(sql, {"user_id":user_id})
+        db.session.commit()
+    except:
+        return False
+    return True     
 
 def isTeacher():
     sql = "SELECT teacher FROM privileges WHERE user_id=:id"
