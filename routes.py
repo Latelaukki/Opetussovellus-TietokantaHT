@@ -42,7 +42,7 @@ def logout():
 
 @app.route("/profile/<int:id>")
 def profile(id):
-    loggedIn = False
+    loggedIn = False 
     teacher = False
     admin = False
     if users.isAdmin():

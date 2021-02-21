@@ -44,14 +44,19 @@ def addTeacher(username):
     return True     
 
 def isTeacher():
+    if user_id() == 0:
+        return False
     sql = "SELECT teacher FROM privileges WHERE user_id=:id"
     result = db.session.execute(sql, {"id":user_id()})
-    return result.fetchone() == 1
+    return result.fetchone()[0] == 1
 
 def isAdmin():
+    if user_id() == 0:
+        return False
+    print(user_id())    
     sql = "SELECT admin FROM privileges WHERE user_id=:id"
     result = db.session.execute(sql, {"id":user_id()})
-    return result.fetchone() == 1
+    return result.fetchone()[0] == 1
 
 def isEmpty(username):
     return username == ""
