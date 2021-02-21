@@ -22,8 +22,9 @@ Sovelluksen etusivulta pääsee luomaan käyttäjän, joka saa automaattisesti o
 
 Ylläpitäjän "ominaisuuksia" pääsee tarkastelemaan seuraavilla tunnuksilla:
 
-käyttäjätunnus: admin001
-\nsalasana: testiadmin
+käyttäjätunnus: ```admin001```
+
+salasana: ```testiadmin```
 
 Ylläpitäjänä on alustava linkki käyttöoikeuksien jakamiseen, mutta toistaiseksi lomake ei vielä tee mitään.. Käyttöoikeuksien muuttamiseen tulee antaa tunnus ja salasana, tätä kirjoittaessani tajusin, että editprivilege-sivulle päästyään oikeuksien muuttaminen varmaan onnistuu millä tahansa tietokannassa olevilla tunnuksilla eikä vain ylläpitäjän, mikä ei ole tietenkään tarkoitus. Opettajiin liittyvää toiminnallisuutta ei ole vielä, mutta oikeudet voi tarkistaa. 
 
