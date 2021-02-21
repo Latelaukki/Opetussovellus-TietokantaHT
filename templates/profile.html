@@ -1,0 +1,15 @@
+<h2>Profiili</h2>
+<p>
+<a href="/">Etusivu</a>
+<p>    
+<h3>Omat kurssit:</h3>
+<p>        
+{% if isAdmin %}
+    <a href="/editprivileges">Anna käyttöoikeuksia</a>
+{% endif %}
+<p>
+{% if session.user_id %}    
+<a href="/logout">Kirjaudu ulos</a>
+{% endif %}
+<p>
+<a href="/delete">Poista profiili</a>   

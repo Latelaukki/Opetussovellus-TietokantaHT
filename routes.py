@@ -5,10 +5,9 @@ import courses, users
 @app.route("/")
 def index():
     allow = False
-    list = courses.get_courses
-    if users.isTeacher():
+    if users.isAdmin():
         allow = True       
-    return render_template("index.html", courses=list, IsTeacher=allow)
+    return render_template("index.html", IsAdmin=allow)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -41,23 +40,36 @@ def logout():
     users.logout()
     return redirect("/")
 
-# @add.route("/courses", methods=["GET"])
-# def courses():    
-#     if request.method == "GET":
-#         return render_template("courses.html")
-
-# @app.route("/add", methods=["GET", "POST"])
-# def add():
-#     allow = False
-#     if users.isTeacher:
-#         allow = True
-
 @app.route("/profile/<int:id>")
 def profile(id):
-    allow = False
-    if users.isAdmin() or users.isTeacher():
-        allow = True
-    elif users.isUser() and users.user_id() == id:
-        allow = True
-    if not allow:
-        return render_template("error.html",error="Ei oikeutta nähdä sivua")
+    loggedIn = False
+    teacher = False
+    admin = False
+    if users.isAdmin():
+        admin = True 
+    if users.isTeacher():
+        teacher = True  
+    if users.user_id() == id:
+        loggedIn = True        
+    if not loggedIn and not teacher and not admin:
+        return redirect("/")
+    else:
+        return render_template("profile.html", isAdmin=admin, isTeacher=teacher)    
+
+@app.route("/editprivileges", methods=["GET", "POST"])
+def addprivileges():
+    admin = False
+    if users.isAdmin(): 
+        admin = True       
+    if not admin:
+        return redirect("/")
+    else:
+        if request.method == "GET":
+            return render_template("editprivileges.html")    
+        if request.method == "POST":
+            username = request.form["username"]
+            password = request.form["password"]
+            if users.login(username,password):
+                return redirect("/")
+            else:
+                return render_template("editprivileges.html",message="Väärä tunnus tai salasana")

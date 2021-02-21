@@ -31,11 +31,6 @@ def register(username,password):
         return False   
     return login(username,password)
 
-def isUser():
-    sql = "SELECT 1 FROM users WHERE user1=:user1 AND user2=:user2"
-    result = db.session.execute(sql, {"user1":user_id(), "user2":id})
-    return result.fetchone() != None
-
 def addTeacher(username):
     try:
         sql = "SELECT id FROM users WHERE username=:username"
@@ -51,7 +46,12 @@ def addTeacher(username):
 def isTeacher():
     sql = "SELECT teacher FROM privileges WHERE user_id=:id"
     result = db.session.execute(sql, {"id":user_id()})
-    return result.fetchone() == 1
+    return result.fetchone()[0] == 1
+
+def isAdmin():
+    sql = "SELECT admin FROM privileges WHERE user_id=:id"
+    result = db.session.execute(sql, {"id":user_id()})
+    return result.fetchone()[0] == 1
 
 def isEmpty(username):
     return username == ""
