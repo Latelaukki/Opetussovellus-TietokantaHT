@@ -14,7 +14,7 @@ Lisäksi kursseille voi lisätä tekstimateriaalia ja monivalintatehtäviä. Teh
 Sovellukseen pääsee [täältä](https://tietokanta-opetussovellus.herokuapp.com/):
 
 
-Sovelluksen tila tällä hetkellä:
+## Sovelluksen tila tällä hetkellä:
 
 Sovelluksen tila on vielä turhan vaiheessa, sillä ulkonäkö on kolkko eikä kursseihin liittyvää toiminnallisuutta ole vielä. Taulut kursseille on kuitenkin luotu ja jotain tiedostoja ennalta. 
 
@@ -27,6 +27,6 @@ salasana: testiadmin
 
 Ylläpitäjänä on alustava linkki käyttöoikeuksien jakamiseen, mutta toistaiseksi lomake ei vielä tee mitään.. Käyttöoikeuksien muuttamiseen tulee antaa tunnus ja salasana, tätä kirjoittaessani tajusin, että editprivilege-sivulle päästyään oikeuksien muuttaminen varmaan onnistuu millä tahansa tietokannassa olevilla tunnuksilla eikä vain ylläpitäjän, mikä ei ole tietenkään tarkoitus. Opettajiin liittyvää toiminnallisuutta ei ole vielä, mutta oikeudet voi tarkistaa. 
 
-Muita tiedossa olevia ongelmia:
+## Muita tiedossa olevia ongelmia:
 Etusivulla on linkki vain käyttäjän omaan profiiliin, mutta manuaalisesti pystyy vaihtamaan URL:sta id:n toiseksi. Kuitenkin pitäisi onnistua vain ylläpitäjän oikeuksilla. 
 Sovelluksen ulkonäölle en ole ehtinyt tehdä vielä mitään, esim. linkit samassa kasassa eikä muuta muotoilua.
