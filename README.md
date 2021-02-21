@@ -3,22 +3,30 @@
 Tämän sovelluksen tarkoituksena on tarjota yksinkertainen alusta opetuskursseille ja toimia SQL-websovellus-harjoituksena. 
 
 Sovelluksessa on kolme eri käyttäjätyyppiä ja niiden alustavat oikeudet toiminnallisuuksiin: 
-* Opiskelija - voi luoda tunnuksen, ilmoittautua kursseille ja ratkoa tehtäviä
-* Opettaja - voi seurata opiskelijoiden edistymistä
-* Ylläpitäjä - voi lisätä kursseja ja niille materiaalia, poistaa käyttäjiä ja muut ilmenevät hallinnolliset oikeudet
+* Opiskelija - voi luoda tunnuksen, tarkastella omaa profiiliaan, ilmoittautua kursseille ja ratkoa tehtäviä
+* Opettaja - voi tarkastella kursseille ilmoittautuneita opiskelijoita sekä heidän edistymistään ja lisätä kursseja ja materiaaleja ja mahdollisesti lisätä muita     opettajia
+* Ylläpitäjä - voi tarkastella ja poistaa muita käyttäjiä ja jakaa tai poistaa käyttöoikeuksia
 
+  Oikeudet päivittyvät vielä...
+  
 Lisäksi kursseille voi lisätä tekstimateriaalia ja monivalintatehtäviä. Tehtävät voi tarkistaa automaattisesti.
 
 Sovellukseen pääsee [täältä](https://tietokanta-opetussovellus.herokuapp.com/):
 
-Sovelluksen toiminnallisuudet ovat vielä sen verran vaiheessa, että kummempia käyttöohjeita ei oikein ole.
 
 Sovelluksen tila tällä hetkellä:
 
-Sovelluksen voi avata, mutta itselleni aukeaa vain uloskirjautumislinkki. Tunnuksen luonti pitäisi toimia, mutta uloskirjautuminen puuttuu, joten kerran sisään kirjauduttua register-sivulle ei ilmeisesti pääse. Kurssien käsittely on vielä kokonaan toteuttamatta, courses-taulu on kuitenkin luotu tietokantaan. 
+Sovelluksen tila on vielä turhan vaiheessa, sillä ulkonäkö on kolkko eikä kursseihin liittyvää toiminnallisuutta ole vielä. Taulut kursseille on kuitenkin luotu ja jotain tiedostoja ennalta. 
 
-Sisäänkirjautuminen aiheuttaa oudon varoituksen tietosuojaloukkauksesta. Ei vielä ihan selvinnyt, mitä tarkoittaa.
+Sovelluksen etusivulta pääsee luomaan käyttäjän, joka saa automaattisesti opiskelijan oikeudet. Opiskelijana pääsee tarkastelemaan omaa profiiliaan, mutta ei juuri muuta. Linkkejä on valmiiksi tehty, mutta osa ei johda mihinkään.
 
-Schema.sql ei päivittynyt herokuun, users-taulun attribuutit ovat väärät. Lieneekö syy, että samanniminen taulu pitää ensin poistaa tietokannasta(?). Korjaus ei ehdi tähän palautukseen.
+Ylläpitäjän "ominaisuuksia" pääsee tarkastelemaan seuraavilla tunnuksilla:
 
+käyttäjätunnus: admin001
+salasana: testiadmin
 
+Ylläpitäjänä on alustava linkki käyttöoikeuksien jakamiseen, mutta toistaiseksi lomake ei vielä tee mitään.. Käyttöoikeuksien muuttamiseen tulee antaa tunnus ja salasana, tätä kirjoittaessani tajusin, että editprivilege-sivulle päästyään oikeuksien muuttaminen varmaan onnistuu millä tahansa tietokannassa olevilla tunnuksilla eikä vain ylläpitäjän, mikä ei ole tietenkään tarkoitus. Opettajiin liittyvää toiminnallisuutta ei ole vielä, mutta oikeudet voi tarkistaa. 
+
+Muita tiedossa olevia ongelmia:
+Etusivulla on linkki vain käyttäjän omaan profiiliin, mutta manuaalisesti pystyy vaihtamaan URL:sta id:n toiseksi. Kuitenkin pitäisi onnistua vain ylläpitäjän oikeuksilla. 
+Sovelluksen ulkonäölle en ole ehtinyt tehdä vielä mitään, esim. linkit samassa kasassa eikä muuta muotoilua.
