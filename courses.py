@@ -5,7 +5,11 @@ def get_courses():
     result = db.session.execute(sql)
     return result.fetchall()
 
-def add_course():
-    sql = "INSERT INTO courses (name, content) VALUES (testi-kurssi, hello)"
-    db.session.commit()
+def add_course(name, content):
+    try:
+        sql = "INSERT INTO courses (name, content) VALUES (:name, :content)"
+        result = db.session.execute(sql, {"name":name,"content":content})
+        db.session.commit()
+    except:
+        return False    
     return True

@@ -31,35 +31,65 @@ def register(username,password):
         return False   
     return login(username,password)
 
-def addTeacher(username):
+def addTeacher():
     try:
-        sql = "SELECT id FROM users WHERE username=:username"
-        result = db.session.execute(sql, {"username":username})
-        user_id = result.fetchone()
         sql = "UPDATE privileges SET teacher = 1 WHERE user_id=:user_id"
-        db.session.execute(sql, {"user_id":user_id})
+        db.session.execute(sql, {"user_id":user_id()})
         db.session.commit()
     except:
         return False
     return True     
+
+def addAdmin():
+    try:
+        sql = "UPDATE privileges SET admin = 1 WHERE user_id=:user_id"
+        db.session.execute(sql, {"user_id":user_id()})
+        db.session.commit()
+    except:
+        return False
+    return True     
+
+def removeTeacher():
+    try:
+        sql = "UPDATE privileges SET teacher = 0 WHERE user_id=:user_id"
+        db.session.execute(sql, {"user_id":user_id()})
+        db.session.commit()
+    except:
+        return False
+    return True
+
+def removeAdmin():
+    try:
+        sql = "UPDATE privileges SET admin = 0 WHERE user_id=:user_id"
+        db.session.execute(sql, {"user_id":user_id()})
+        db.session.commit()
+    except:
+        return False
+    return True
 
 def isTeacher():
     if user_id() == 0:
         return False
     sql = "SELECT teacher FROM privileges WHERE user_id=:id"
     result = db.session.execute(sql, {"id":user_id()})
-    return result.fetchone()[0] == 1
+    teacher = result.fetchone()
+    return teacher != None
 
 def isAdmin():
     if user_id() == 0:
-        return False
-    print(user_id())    
+        return False 
     sql = "SELECT admin FROM privileges WHERE user_id=:id"
     result = db.session.execute(sql, {"id":user_id()})
-    return result.fetchone()[0] == 1
+    admin = result.fetchone()
+    return admin != None
 
 def isEmpty(username):
     return username == ""
 
 def user_id():
     return session.get("user_id",0)
+
+def getUsers():
+    result = db.session.execute("SELECT id, username FROM users")
+    users = result.fetchall()
+    return users

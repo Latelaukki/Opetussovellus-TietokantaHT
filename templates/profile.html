@@ -5,7 +5,7 @@
 <h3>Omat kurssit:</h3>
 <p>        
 {% if isAdmin %}
-    <a href="/editprivileges">Anna käyttöoikeuksia</a>
+    <a href="/editprivileges/{{ id }}">Anna käyttöoikeuksia</a>
 {% endif %}
 <p>
 {% if session.user_id %}    

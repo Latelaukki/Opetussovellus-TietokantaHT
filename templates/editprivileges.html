@@ -1,15 +1,14 @@
 <form action="/editprivileges" method="post">
-Valitse oikeudet:
+Valitse oikeudet
+<p>    
+Opettaja: <input type="radio" name="newTeacher" value="yes" {{ teacher }}> kyllä
+<input type="radio" name="newTeacher" value="no" checked> ei
 <p>
-<input type="checkbox" name="teacher" value="kyllä"> opettaja
-<input type="checkbox" name="admin" value="kyllä"> ylläpitäjä
+Ylläpitäjä: <input type="radio" name="newAdmin" value="yes" {{ admin }}> kyllä
+<input type="radio" name="newAdmin" value="no" checked> ei
 <p>
-Tunnus: <input type="text" name="username">
-<p>
-Salasana: <input type="password" name="password">
-<p>
-{{ message }}
-<p>
+    {{ message}}
+<p>  
 <input type="submit" value="hyväksy">
-</form>
-<a href="/profile/{{session.user_id}}">peruuta</a>   
+</form> 
+<a href="/profile/{{session.user_id}}">peruuta</a> 

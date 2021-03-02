@@ -1,0 +1,9 @@
+<h>Käyttäjät</h>
+<p>
+<hr>
+{% for user in users %}
+<a href="/profile/{{ user[0] }}">{{ user[1] }}</a>
+<hr>
+{% endfor %}
+<p>
+<a href="/">Etusivu</a>   

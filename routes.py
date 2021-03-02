@@ -56,8 +56,8 @@ def profile(id):
     else:
         return render_template("profile.html", isAdmin=admin, isTeacher=teacher)    
 
-@app.route("/editprivileges", methods=["GET", "POST"])
-def addprivileges():
+@app.route("/editprivileges/<int:id>", methods=["GET", "POST"])
+def editprivileges(id):
     admin = False
     if users.isAdmin(): 
         admin = True       
@@ -65,11 +65,38 @@ def addprivileges():
         return redirect("/")
     else:
         if request.method == "GET":
-            return render_template("editprivileges.html")    
+            alreadyAdmin = ""
+            alreadyTeacher = ""
+            if users.isAdmin:
+                alreadyAdmin = "checked"
+            if users.isTeacher:
+                alreadyTeacher = "checked"
+            return render_template("editprivileges.html", teacher=alreadyTeacher, admin=alreadyAdmin)    
         if request.method == "POST":
-            username = request.form["username"]
-            password = request.form["password"]
-            if users.login(username,password):
-                return redirect("/")
+            newTeacher = request.form["newTeacher"]
+            newAdmin = request.form["newAdmin"]
+            if newTeacher == "yes":
+                if not users.addTeacher():
+                    return render_template("editprivileges.html", message="Tapahtui virhe opettajan lisäyksessä, yritä uudelleen")
             else:
-                return render_template("editprivileges.html",message="Väärä tunnus tai salasana")
+                if not users.removeTeacher():
+                    return render_template("editprivileges.html", message="Tapahtui virhe opettajan poistossa, yritä uudelleen")
+            if newAdmin == "yes":
+                if not users.addAdmin():
+                    return render_template("editprivileges.html", message="Tapahtui virhe ylläpitäjän lisäyksessä, yritä uudelleen")
+            else:
+                if not users.removeAdmin():
+                    return render_template("editprivileges.html", message="Tapahtui virhe ylläpitäjän poistossa, yritä uudelleen")
+            return redirect("/")
+            # return redirect("/profile/<int:id>.html")
+
+@app.route("/allprofiles")     
+def allprofiles():
+    admin = False
+    if users.isAdmin(): 
+        admin = True       
+    if not admin:
+        return redirect("/")
+    else:
+        allUsers = users.getUsers()
+    return render_template("allprofiles.html", users=allUsers)    
