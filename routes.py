@@ -5,7 +5,7 @@ import courses, users
 @app.route("/")
 def index():
     allow = False
-    if users.isAdmin():
+    if users.isAdmin(users.user_id()):
         allow = True       
     return render_template("index.html", IsAdmin=allow)
 
@@ -45,58 +45,51 @@ def profile(id):
     loggedIn = False 
     teacher = False
     admin = False
-    if users.isAdmin():
+    if users.isAdmin(users.user_id()):
         admin = True 
-    if users.isTeacher():
+    if users.isTeacher(users.user_id()):
         teacher = True  
     if users.user_id() == id:
         loggedIn = True        
     if not loggedIn and not teacher and not admin:
         return redirect("/")
     else:
-        return render_template("profile.html", isAdmin=admin, isTeacher=teacher)    
+        return render_template("profile.html", isAdmin=admin, isTeacher=teacher, id=id)    
 
 @app.route("/editprivileges/<int:id>", methods=["GET", "POST"])
 def editprivileges(id):
     admin = False
-    if users.isAdmin(): 
+    if users.isAdmin(users.user_id()):
         admin = True       
     if not admin:
         return redirect("/")
     else:
         if request.method == "GET":
-            alreadyAdmin = ""
-            alreadyTeacher = ""
-            if users.isAdmin:
-                alreadyAdmin = "checked"
-            if users.isTeacher:
-                alreadyTeacher = "checked"
-            return render_template("editprivileges.html", teacher=alreadyTeacher, admin=alreadyAdmin)    
+            return render_template("editprivileges.html", id=id)    
         if request.method == "POST":
             newTeacher = request.form["newTeacher"]
             newAdmin = request.form["newAdmin"]
             if newTeacher == "yes":
-                if not users.addTeacher():
+                if not users.addTeacher(id):
                     return render_template("editprivileges.html", message="Tapahtui virhe opettajan lisäyksessä, yritä uudelleen")
-            else:
-                if not users.removeTeacher():
+            if newTeacher == "no":
+                if not users.removeTeacher(id):
                     return render_template("editprivileges.html", message="Tapahtui virhe opettajan poistossa, yritä uudelleen")
             if newAdmin == "yes":
-                if not users.addAdmin():
+                if not users.addAdmin(id):
                     return render_template("editprivileges.html", message="Tapahtui virhe ylläpitäjän lisäyksessä, yritä uudelleen")
-            else:
-                if not users.removeAdmin():
+            if newAdmin == "no":
+                if not users.removeAdmin(id):
                     return render_template("editprivileges.html", message="Tapahtui virhe ylläpitäjän poistossa, yritä uudelleen")
-            return redirect("/")
-            # return redirect("/profile/<int:id>.html")
+            return redirect("/profile/" + str(id))
 
 @app.route("/allprofiles")     
 def allprofiles():
     admin = False
-    if users.isAdmin(): 
+    if users.isAdmin(users.user_id()): 
         admin = True       
     if not admin:
         return redirect("/")
     else:
         allUsers = users.getUsers()
-    return render_template("allprofiles.html", users=allUsers)    
+    return render_template("allprofiles.html", users=allUsers)     

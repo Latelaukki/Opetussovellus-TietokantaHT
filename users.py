@@ -31,57 +31,57 @@ def register(username,password):
         return False   
     return login(username,password)
 
-def addTeacher():
+def addTeacher(id):
     try:
         sql = "UPDATE privileges SET teacher = 1 WHERE user_id=:user_id"
-        db.session.execute(sql, {"user_id":user_id()})
+        db.session.execute(sql, {"user_id":id})
         db.session.commit()
     except:
         return False
     return True     
 
-def addAdmin():
+def addAdmin(id):
     try:
         sql = "UPDATE privileges SET admin = 1 WHERE user_id=:user_id"
-        db.session.execute(sql, {"user_id":user_id()})
+        db.session.execute(sql, {"user_id":id})
         db.session.commit()
     except:
         return False
     return True     
 
-def removeTeacher():
+def removeTeacher(id):
     try:
         sql = "UPDATE privileges SET teacher = 0 WHERE user_id=:user_id"
-        db.session.execute(sql, {"user_id":user_id()})
+        db.session.execute(sql, {"user_id":id})
         db.session.commit()
     except:
         return False
     return True
 
-def removeAdmin():
+def removeAdmin(id):
     try:
         sql = "UPDATE privileges SET admin = 0 WHERE user_id=:user_id"
-        db.session.execute(sql, {"user_id":user_id()})
+        db.session.execute(sql, {"user_id":id})
         db.session.commit()
     except:
         return False
     return True
 
-def isTeacher():
+def isTeacher(id):
     if user_id() == 0:
         return False
     sql = "SELECT teacher FROM privileges WHERE user_id=:id"
-    result = db.session.execute(sql, {"id":user_id()})
-    teacher = result.fetchone()
-    return teacher != None
+    result = db.session.execute(sql, {"id":id})
+    teacher = result.fetchone()[0]
+    return teacher == 1
 
-def isAdmin():
+def isAdmin(id):
     if user_id() == 0:
         return False 
     sql = "SELECT admin FROM privileges WHERE user_id=:id"
-    result = db.session.execute(sql, {"id":user_id()})
-    admin = result.fetchone()
-    return admin != None
+    result = db.session.execute(sql, {"id":id})
+    admin = result.fetchone()[0]
+    return admin == 1
 
 def isEmpty(username):
     return username == ""

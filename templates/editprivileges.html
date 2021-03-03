@@ -1,14 +1,14 @@
-<form action="/editprivileges" method="post">
+<form action="/editprivileges/{{ id }}" method="post">
 Valitse oikeudet
 <p>    
-Opettaja: <input type="radio" name="newTeacher" value="yes" {{ teacher }}> kyllä
+Opettaja: <input type="radio" name="newTeacher" value="yes"> kyllä
 <input type="radio" name="newTeacher" value="no" checked> ei
 <p>
-Ylläpitäjä: <input type="radio" name="newAdmin" value="yes" {{ admin }}> kyllä
+Ylläpitäjä: <input type="radio" name="newAdmin" value="yes"> kyllä
 <input type="radio" name="newAdmin" value="no" checked> ei
 <p>
     {{ message}}
 <p>  
 <input type="submit" value="hyväksy">
 </form> 
-<a href="/profile/{{session.user_id}}">peruuta</a> 
+<a href="/profile/{{ id }}">peruuta</a> 
