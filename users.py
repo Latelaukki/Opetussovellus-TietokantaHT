@@ -91,5 +91,4 @@ def user_id():
 
 def getUsers():
     result = db.session.execute("SELECT id, username FROM users")
-    users = result.fetchall()
-    return users
+    return result.fetchall()

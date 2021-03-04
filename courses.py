@@ -1,11 +1,10 @@
 from db import db
 
-def get_courses():
-    sql = "SELECT C.name FROM courses C ORDER BY C.id"
-    result = db.session.execute(sql)
+def getCourses():
+    result = db.session.execute("SELECT id, name FROM courses C ORDER BY C.id")
     return result.fetchall()
 
-def add_course(name, content):
+def addCourse(name, content):
     try:
         sql = "INSERT INTO courses (name, content) VALUES (:name, :content)"
         result = db.session.execute(sql, {"name":name,"content":content})

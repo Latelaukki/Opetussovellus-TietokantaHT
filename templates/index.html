@@ -4,11 +4,11 @@ Olet kirjautunut sisään.
 <p>
 <a href="/profile/{{session.user_id}}">Oma profiili</a>
 <p>
-<a href="/courses">Selaa kursseja</a>
+<a href="/allcourses">Selaa kursseja</a>
 <p>
 <a href="/logout">Kirjaudu ulos</a>
     <p>
-    {% if IsAdmin %}
+    {% if isAdmin %}
         <a href="/allprofiles">Selaa profiileja</a>
     {% endif %}
 {% else %}

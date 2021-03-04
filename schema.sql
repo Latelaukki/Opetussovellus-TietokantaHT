@@ -6,7 +6,8 @@ CREATE TABLE users (
 
 CREATE TABLE courses (
     id SERIAL PRIMARY KEY,
-    name TEXT UNIQUE NOT NULL UNIQUE,
+    code TEXT UNIQUE NOT NULL UNIQUE,
+    name TEXT NOT NULL,
     content TEXT NOT NULL
 );
 

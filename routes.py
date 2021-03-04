@@ -7,7 +7,7 @@ def index():
     allow = False
     if users.isAdmin(users.user_id()):
         allow = True       
-    return render_template("index.html", IsAdmin=allow)
+    return render_template("index.html", isAdmin=allow)
 
 @app.route("/login", methods=["GET","POST"])
 def login():
@@ -93,3 +93,11 @@ def allprofiles():
     else:
         allUsers = users.getUsers()
     return render_template("allprofiles.html", users=allUsers)     
+
+@app.route("/allcourses")
+def allcourses():
+    teacher = False
+    if users.isTeacher(users.user_id()):
+        teacher = True
+    allCourses = courses.getCourses()
+    return render_template("allcourses.html", courses=allCourses, isTeacher=teacher)    

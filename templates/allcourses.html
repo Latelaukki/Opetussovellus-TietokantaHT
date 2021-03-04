@@ -1,0 +1,12 @@
+<h>Kurssit</h>
+<p>
+<hr>
+{% for course in courses %}
+<a href="/course/{{ course[0] }}">{{ course[1] }}</a>
+<hr>
+{% endfor %}
+<p>
+<a href="/">Etusivu</a>   
+{% if isTeacher %}
+<a href="/addcourse">Lisää kurssi</a>
+{% endif %}
