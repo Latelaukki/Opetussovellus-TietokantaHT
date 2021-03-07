@@ -87,7 +87,8 @@ def delete(id):
     if not allow:
         return redirect("/profile/" + str(id))
     if request.method == "GET":
-        return render_template("delete.html", isAdmin=isAdmin, id=id)    
+        username = users.getUsername(id)
+        return render_template("delete.html", isAdmin=isAdmin, id=id, username=username)    
     if request.method == "POST":
         if users.isTeacher(id):
             return render_template("delete.html", isAdmin=isAdmin, id=id, message="Et voi poistaa käyttäjää, joka on opettaja.")
