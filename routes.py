@@ -154,9 +154,9 @@ def course(id):
     if request.method == "GET":
         return render_template("course.html", id=id, code=code, name=name, content=content, isCourseTeacher=isCourseTeacher, canAnswerQuestions=canAnswerQuestions, quizzes=quizzes1, teacher=teacher)
     if request.method == "POST":
-        choices = request.form.getlist(choice)
-        quizzes.checkAnswers(choices, id)
-        return render_template("course.html")    
+        # choices = request.form.getlist(choice)
+        # quizzes.checkAnswers(choices, id)
+        return render_template("course.html", id=id, code=code, name=name, content=content, isCourseTeacher=isCourseTeacher, canAnswerQuestions=canAnswerQuestions, quizzes=quizzes1, teacher=teacher)    
 
 
 @app.route("/addquestion/<int:id>", methods=["GET","POST"])
