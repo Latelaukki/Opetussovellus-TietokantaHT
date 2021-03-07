@@ -8,7 +8,7 @@ def addCourse(code, name, content, teacher_id):
         db.session.commit()
     except:
         return False    
-    return True   
+    return True
 
 def isCourseTeacher(id):
     sql = "SELECT teacher_id FROM courses WHERE id=:id"
@@ -48,7 +48,12 @@ def getCourseTeacher(id):
 
 def getCourses():
     result = db.session.execute("SELECT id, code, name FROM courses ORDER BY name")
-    return result.fetchall()    
+    return result.fetchall()
+
+def getTeachersCourses(user_id):
+    sql = "SELECT id, code, name FROM courses WHERE teacher_id=:user_id"
+    result = db.session.execute(sql, {"user_id":user_id})
+    return result.fetchall()
 
 def participateCourse(course_id):
     try:

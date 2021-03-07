@@ -56,7 +56,8 @@ def profile(id):
     else:
         username = users.getUsername(id)
         joinedCourses = courses.getJoinedCourses(id)
-        return render_template("profile.html", isAdmin=admin, isTeacher=teacher, id=id, loggedIn=loggedIn, username=username, joinedCourses=joinedCourses)    
+        teachingCourses = courses.getTeachersCourses(id)
+        return render_template("profile.html", isAdmin=admin, isTeacher=teacher, id=id, loggedIn=loggedIn, username=username, joinedCourses=joinedCourses, teachingCourses=teachingCourses)    
 
 @app.route("/editprivileges/<int:id>", methods=["GET", "POST"])
 def editprivileges(id):

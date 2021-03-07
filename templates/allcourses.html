@@ -3,7 +3,8 @@
 <hr>
 {% for course in courses %}
 <a href="/course/{{ course[0] }}">{{ course[1] }}</a>
-<a href="/participate/{{ course[0] }}">ilmoittaudu/poista ilmoittautuminen</a>
+{% if not isTeacher %}
+<a href="/participate/{{ course[0] }}">{% endif %}ilmoittaudu/poista ilmoittautuminen</a>
 <hr>
 {% endfor %}
 <p>

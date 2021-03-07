@@ -12,11 +12,18 @@
 {% else %}
     Käyttäjän kurssit:
     <br>
-{% endif %}        
+{% endif %}
+{% if isTeacher %}
+    {% for teachingCourse in teachingCourses %}
+        <a href="/course/{{ teachingCourse[0] }}">{{ teachingCourse[1] }} - {{ teachingCourse[2] }}</a>
+        <br> 
+    {% endfor %}
+{% else %}                       
     {% for joinedCourse in joinedCourses %}
-    <a href="/course/{{ joinedCourse[0] }}">{{ joinedCourse[1] }} - {{ joinedCourse[2] }}</a>
+        <a href="/course/{{ joinedCourse[0] }}">{{ joinedCourse[1] }} - {{ joinedCourse[2] }}</a>
         <br>
     {% endfor %}
+{% endif %}
 <br>
 <br>  
 {% if isAdmin %}
