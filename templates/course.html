@@ -1,0 +1,42 @@
+<form action="/course/{{ id }}" method="post">
+<h2>{{ code }} - {{ name }}</h2> 
+<a href="/">Etusivu</a>
+<br>
+Vastuuopettaja: {{ teacher }}    
+<br>
+{% if isCourseTeacher %}
+    <a href="/addquestion/{{ id }}">Lisää tehtävä</a>
+{% endif %}
+<p>
+{{ content }}
+
+<h2>Tehtävät</h2>
+<p>
+valitse oikea/oikeat vaihtoehdot:
+{% if canAnswerQuestions %}
+    {% for quiz in quizzes %}
+    <p>
+    <h3>{{ quiz[0] }}</h3>              
+        <p>
+        <input type="hidden" name="choice" value="{{ quiz[0] }}">           <!-- En keksinyt, miten saan kerättyä eri kysymysten vastaukset eri listoihin-->
+        <input type="checkbox" name="choice" value="1">{{ quiz[1] }}        <!-- ja siten verrattua oikeisiin vastauksiin, niin kaikki vastaukset ovat-->
+        <input type="checkbox" name="choice" value="2">{{ quiz[2] }}        <!-- samassa listassa, jossa vastausten välissä on aina kysymys, jolla-->
+        <input type="checkbox" name="choice" value="3">{{ quiz[3] }}        <!-- eri vastaukset saa eroteltua toisistaan. -->
+        <input type="checkbox" name="choice" value="4">{{ quiz[4] }}     
+        <input type="submit" value="Vastaa">
+    {% endfor %}
+</form>          
+{% else %}
+    {% for quiz in quizzes %}
+    <p>
+    <h3>{{ quiz[0] }}</h3>
+    <p>
+        {{ quiz[1] }}
+        {{ quiz[2] }}
+        {{ quiz[3] }}
+        {{ quiz[4] }}
+    {% endfor %}
+{% endif %}
+
+
+      

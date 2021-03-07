@@ -1,9 +1,24 @@
-<h2>Profiili</h2>
+{% if loggedIn %}
+<h2>Oma profiili</h2>
+{% else %}
+<h2>Käyttäjä: {{ username }}</h2>
+{% endif %}
 <p>
 <a href="/">Etusivu</a>
-<p>    
+<br>
+<br>
+{% if loggedIn %}    
 <h3>Omat kurssit:</h3>
-<p>        
+{% else %}
+    Käyttäjän kurssit:
+    <br>
+{% endif %}        
+    {% for joinedCourse in joinedCourses %}
+    <a href="/course/{{ joinedCourse[0] }}">{{ joinedCourse[1] }} - {{ joinedCourse[2] }}</a>
+        <br>
+    {% endfor %}
+<br>
+<br>  
 {% if isAdmin %}
     <a href="/editprivileges/{{ id }}">Anna käyttöoikeuksia</a>
 {% endif %}
@@ -12,4 +27,4 @@
 <a href="/logout">Kirjaudu ulos</a>
 {% endif %}
 <p>
-<a href="/delete">Poista profiili</a>   
+<a href="/delete/{{ id }}">Poista profiili</a>   

@@ -1,0 +1,14 @@
+<form action="/participate/{{ id }}" method="post">
+{% if isAlreadyStudent %}    
+Olet jo ilmoittautunut kurssille. Halutko peruuttaa ilmoittautumisesi?
+<p>
+<input type="submit" value="kyllä">
+{% else %}
+Ilmoittaudu kurssille {{ code }} - {{ name }}
+<p>
+<input type="submit" value="ilmoittaudu">
+{% endif %}
+<p>
+<a href="/allcourses">Peruuta</a>
+<p>
+{{ message }}

@@ -6,11 +6,13 @@ Olet kirjautunut sisään.
 <p>
 <a href="/allcourses">Selaa kursseja</a>
 <p>
-<a href="/logout">Kirjaudu ulos</a>
     <p>
     {% if isAdmin %}
         <a href="/allprofiles">Selaa profiileja</a>
     {% endif %}
+<br>
+<br>   
+<a href="/logout">Kirjaudu ulos</a>    
 {% else %}
 <a href="/login">Kirjaudu sisään</a>
 {% endif %}

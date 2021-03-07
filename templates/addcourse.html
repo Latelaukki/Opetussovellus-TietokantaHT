@@ -1,3 +1,16 @@
+<form action="/addcourse" method=post>
 <h2>Lisää kurssi</h2>
 <p>
-Kurssin nimi:
+Kurssin koodi/tunnus: <input type="text" name="code">
+<p>
+Kurssin nimi: <input type="text" name="name">
+<p>
+Kurssimateriaali: <textarea name="content"></textarea>
+<p>
+<input type="submit" value="Lisää kurssi">
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{{ message }}
+
+<a href="/allcourses">peruuta</a>

@@ -1,0 +1,25 @@
+<form action="/addquestion/{{ id }}" method="post">
+Kysymys: <textarea name="question"></textarea>
+<p>
+Vaihtoehto 1: <input type="text" name="choice1">
+<p>
+Vaihtoehto 2: <input type="text" name="choice2">
+<p>
+Vaihtoehto 3: <input type="text" name="choice3">
+<p>
+Vaihtoehto 4: <input type="text" name="choice4">
+<p>   
+Oikea/oikeat vaihtoehdot:
+<p>
+<input type="checkbox" name="answer" value="1"> 1
+<input type="checkbox" name="answer" value="2"> 2
+<input type="checkbox" name="answer" value="3"> 3
+<input type="checkbox" name="answer" value="4"> 4
+<p>
+<input type="submit" value="Lisää tehtävä">            
+
+
+<input type="hidden" name="csrf_token" value="{{ session.csrf_token }}">
+</form>
+
+{{ message }}

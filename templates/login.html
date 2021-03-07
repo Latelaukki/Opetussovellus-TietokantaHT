@@ -1,12 +1,14 @@
 <form action="/login" method="post">
-Tunnus: <input type="text" name="username">
+<h2>Kirjaudu sisään</h2>
+<a href="/">Etusivu</a>
+<br>
+<br>
+Tunnus: <input type="text" name="username" value="{{ username }}">
 <p>
-Salasana: <input type="password" name="password">
+Salasana: <input type="password" name="password" value="{{ password }}">
 <p>
 {{ message }}
 <p>
 <input type="submit" value="Kirjaudu">
 </form>
 Luo uusi tunnus <a href="/register">tästä</a>
-<p>
-<a href="/">Etusivu</a>    

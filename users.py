@@ -1,5 +1,6 @@
 from db import db
 from flask import session
+import os
 from werkzeug.security import check_password_hash, generate_password_hash
 
 def login(username, password):
@@ -11,6 +12,7 @@ def login(username, password):
     else:
         if check_password_hash(user[0],password):
             session["user_id"] = user[1]
+            session["csrf_token"] = os.urandom(16).hex()
             return True
         else:
             return False
@@ -31,7 +33,31 @@ def register(username,password):
         return False   
     return login(username,password)
 
-def addTeacher(id):
+def deleteUser(id): 
+    try:
+        sql = "DELETE FROM users WHERE id=:id"
+        db.session.execute(sql, {"id":id})
+        db.session.commit()
+    except:
+        return False   
+    return True   
+
+def editprivileges(id, newTeacher, newAdmin):   
+    if newTeacher == "yes":
+        if not setTeacher(id):
+            return False
+    if newTeacher == "no":
+        if not removeTeacher(id):
+            return False
+    if newAdmin == "yes":
+        if not setAdmin(id):
+            return False
+    if newAdmin == "no":
+        if not removeAdmin(id):
+            return False
+    return True        
+
+def setTeacher(id):
     try:
         sql = "UPDATE privileges SET teacher = 1 WHERE user_id=:user_id"
         db.session.execute(sql, {"user_id":id})
@@ -40,7 +66,7 @@ def addTeacher(id):
         return False
     return True     
 
-def addAdmin(id):
+def setAdmin(id):
     try:
         sql = "UPDATE privileges SET admin = 1 WHERE user_id=:user_id"
         db.session.execute(sql, {"user_id":id})
@@ -70,17 +96,23 @@ def removeAdmin(id):
 def isTeacher(id):
     if user_id() == 0:
         return False
-    sql = "SELECT teacher FROM privileges WHERE user_id=:id"
-    result = db.session.execute(sql, {"id":id})
-    teacher = result.fetchone()[0]
+    try:    
+        sql = "SELECT teacher FROM privileges WHERE user_id=:id"
+        result = db.session.execute(sql, {"id":id})
+        teacher = result.fetchone()[0]
+    except:
+        return False    
     return teacher == 1
 
 def isAdmin(id):
     if user_id() == 0:
-        return False 
-    sql = "SELECT admin FROM privileges WHERE user_id=:id"
-    result = db.session.execute(sql, {"id":id})
-    admin = result.fetchone()[0]
+        return False
+    try:     
+        sql = "SELECT admin FROM privileges WHERE user_id=:id"
+        result = db.session.execute(sql, {"id":id})
+        admin = result.fetchone()[0]
+    except:
+        return False    
     return admin == 1
 
 def isEmpty(username):
@@ -92,3 +124,11 @@ def user_id():
 def getUsers():
     result = db.session.execute("SELECT id, username FROM users")
     return result.fetchall()
+
+def getUsername(id):
+    sql = "SELECT username FROM users WHERE id=:id"
+    result = db.session.execute(sql, {"id":id})
+    return result.fetchone()[0]
+
+def valid_csrf():
+    return session["csrf_token"] != request.form["csrf_token"]    
