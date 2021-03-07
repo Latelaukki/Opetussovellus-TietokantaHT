@@ -10,7 +10,7 @@ Sovelluksessa on kolme eri käyttäjätyyppiä ja niiden alustavat oikeudet toim
 Lisäksi kursseille voi lisätä tekstimateriaalia ja monivalintatehtäviä.
 
 Sovellukseen pääsee täältä:
-[https://tietokanta-opetussovellus.herokuapp.com/](https://tietokanta-opetussovellus.herokuapp.com/):
+[https://tietokanta-opetussovellus.herokuapp.com/](https://tietokanta-opetussovellus.herokuapp.com/)
 
 
 ## Sovelluksen lopputulos
